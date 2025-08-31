@@ -2,7 +2,7 @@
 
 ## Sobre o Jogo
 
-**Trilha do Curupira** é um quiz educativo interativo, criado com o objetivo de conscientizar e ensinar sobre a importância da **Floresta Amazônica** e da **sustentabilidade**. Através de 10 perguntas, o jogador é convidado a testar seus conhecimentos e aprofundar a sua compreensão sobre a preservação do meio ambiente.
+**Trilha do Curupira** é um quiz educativo interativo, criado com o objetivo de conscientizar e ensinar sobre a importância da **Floresta Amazônica** e da **Sustentabilidade**. Através de 10 perguntas, o jogador é convidado a testar seus conhecimentos e aprofundar a sua compreensão sobre a preservação do meio ambiente.
 
 O jogo foi desenvolvido como um projeto para o blog https://gamesqueincluem.blogspot.com/
 
