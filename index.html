@@ -5,34 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trilha do Curupira</title>
     <style>
+        /* Estilos Globais e do Container do Jogo */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Comic Sans MS', cursive; background: linear-gradient(135deg, #2d5016, #4a7c59); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .game-container { width: 100%; max-width: 800px; height: 600px; background: linear-gradient(to bottom, #87CEEB, #90EE90); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
-        .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+        .game-container { width: 100%; max-width: 800px; height: auto; background: linear-gradient(to bottom, #87CEEB, #90EE90); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+
+        /* Estilos das Telas */
+        .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; padding: 40px; }
         .screen.active { display: flex; }
+        
+        /* Estilos do Menu Principal */
         .main-menu { flex-direction: column; align-items: center; justify-content: center; position: relative; }
         .main-menu::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: #228B22; clip-path: ellipse(100% 60% at 50% 100%); }
         .title { font-size: 3.5rem; color: #2d5016; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); margin-bottom: 20px; z-index: 10; }
         .subtitle { font-size: 1.2rem; color: #1a3009; margin-bottom: 40px; z-index: 10; }
         .character { width: 120px; height: 120px; margin-bottom: 30px; z-index: 10; }
         .menu-buttons { display: flex; flex-direction: column; gap: 15px; z-index: 10; }
+
+        /* Estilos dos Botões */
         .btn { padding: 15px 40px; font-size: 1.3rem; font-weight: bold; color: white; border: none; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .btn-start { background: linear-gradient(45deg, ##0056b3, #F791E); }
+        .btn-start { background: linear-gradient(45deg, #0056b3, #007bff); color: white; }
         .btn-credits { background: linear-gradient(45deg, #4ECDC4, #26A69A); }
         .btn-exit { background: linear-gradient(45deg, #E74C3C, #C0392B); }
         .btn-play { background: linear-gradient(45deg, #27AE60, #2ECC71); }
         .btn-return { background: linear-gradient(45deg, #9B59B6, #8E44AD); }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-        .instructions-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); padding: 40px; }
-        .forest-bg { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, #228B22, #32CD32); clip-path: ellipse(100% 80% at 50% 100%); }
-        .instructions-content { display: flex; height: 100%; align-items: center; justify-content: space-between; z-index: 10; position: relative; }
-        .instructions-text { flex: 1; background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; margin-right: 30px; font-size: 1.1rem; line-height: 1.6; color: #2d5016; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .instructions-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .quiz-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; padding: 40px; }
+
+        /* Estilos da Tela de Instruções */
+        .instructions-screen { flex-direction: column; align-items: center; }
+        .instructions-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center;}
+        .instructions-text { background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; font-size: 1.1rem; line-height: 1.6; color: #2d5016; box-shadow: 0 5px 15px rgba(0,0,0,0.1); max-width: 600px; margin-bottom: 20px;}
+        .instructions-buttons { display: flex; gap: 15px; }
+
+        /* Estilos da Tela do Quiz */
+        .quiz-screen { flex-direction: column; justify-content: space-between; }
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .score { font-size: 1.5rem; font-weight: bold; color: #2d5016; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 20px; }
         .question-counter { font-size: 1.2rem; color: #2d5016; font-weight: bold; }
-        .question-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .question-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .question { font-size: 1.4rem; color: #2d5016; margin-bottom: 25px; font-weight: bold; text-align: center; }
         .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .option { padding: 15px; background: linear-gradient(45deg, #3498DB, #2980B9); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; }
@@ -42,13 +52,17 @@
         .feedback { text-align: center; font-size: 1.2rem; font-weight: bold; margin: 20px 0; min-height: 30px; }
         .feedback.correct { color: #27AE60; }
         .feedback.incorrect { color: #E74C3C; }
-        .final-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+
+        /* Estilos da Tela Final e Créditos */
+        .final-screen, .credits-screen { flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .final-score { font-size: 4rem; color: #2d5016; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .final-message { font-size: 1.5rem; color: #1a3009; margin-bottom: 40px; }
-        .credits-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); padding: 40px; flex-direction: column; justify-content: center; align-items: center; }
         .credits-content { background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 15px; text-align: center; }
         .credits-title { font-size: 2.5rem; color: #2d5016; margin-bottom: 30px; }
         .credits-text { font-size: 1.2rem; color: #2d5016; line-height: 1.8; margin-bottom: 30px; }
+
+        /* Container dos botões de controle (Retornar, etc) */
+        .controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -87,7 +101,6 @@
         </div>
 
         <div class="screen instructions-screen" id="instructionsScreen">
-            <div class="forest-bg"></div>
             <div class="instructions-content">
                 <div class="instructions-text">
                     <br>
@@ -104,30 +117,9 @@
                     <p>Vamos proteger a Amazônia juntos com o Curupira!</p>
                     <br>
                 </div>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="width: 150px; height: 150px; margin-bottom: 20px;">
-                        <svg width="150" height="150" viewBox="0 0 200 280">
-                            <ellipse cx="100" cy="180" rx="40" ry="60" fill="#D2691E"/>
-                            <ellipse cx="85" cy="240" rx="12" ry="25" fill="#FF4500"/>
-                            <ellipse cx="115" cy="240" rx="12" ry="25" fill="#FF4500"/>
-                            <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
-                            <circle cx="100" cy="120" r="45" fill="#D2691E"/>
-                            <path d="M60,90 Q70,50 80,80 Q90,40 100,70 Q110,35 120,75 Q130,45 140,85" fill="#FF4500"/>
-                            <circle cx="88" cy="115" r="8" fill="white"/>
-                            <circle cx="112" cy="115" r="8" fill="white"/>
-                            <circle cx="88" cy="115" r="5" fill="black"/>
-                            <circle cx="112" cy="115" r="5" fill="black"/>
-                            <path d="M95,135 Q100,138 105,135" stroke="#8B4513" stroke-width="2" fill="none"/>
-                            <ellipse cx="75" cy="165" rx="15" ry="25" fill="#D2691E"/>
-                            <ellipse cx="125" cy="165" rx="15" ry="25" fill="#D2691E"/>
-                            <rect x="70" y="175" width="60" height="40" fill="#8B4513" rx="5"/>
-                            <rect x="75" y="180" width="50" height="30" fill="#FFF8DC" rx="2"/>
-                        </svg>
-                    </div>
-                    <div class="instructions-buttons">
-                        <button class="btn btn-play" onclick="startQuiz()">JOGAR</button>
-                        <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
-                    </div>
+                <div class="controls">
+                    <button class="btn btn-play" onclick="startQuiz()">JOGAR</button>
+                    <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
                 </div>
             </div>
         </div>
@@ -142,8 +134,8 @@
                 <div class="options" id="optionsContainer"></div>
                 <div class="feedback" id="feedback"></div>
             </div>
-            <div style="text-align: center;">
-                <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+            <div class="controls">
+              <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
             </div>
         </div>
 
@@ -167,7 +159,9 @@
             </div>
             <div class="final-score" id="finalScore">100</div>
             <div class="final-message" id="finalMessage">Parabéns!</div>
-            <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+            <div class="controls">
+              <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+            </div>
         </div>
 
         <div class="screen credits-screen" id="creditsScreen">
@@ -184,7 +178,9 @@
                     <p><strong>Objetivo:</strong></p>
                     <p>Educar sobre preservação da floresta amazônica</p>
                 </div>
-                <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+                <div class="controls">
+                  <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+                </div>
             </div>
         </div>
     </div>
@@ -192,56 +188,16 @@
     <script>
         // Array com todas as perguntas e respostas
         const questions = [
-            { 
-                question: "A escolha de Belém, no Pará, como sede da COP 30, envia uma mensagem global. Qual é o principal objetivo de realizar uma Conferência do Clima na Amazônia?", 
-                options: ["Incentivar a exploração de recursos naturais não-renováveis.", "Discutir a preservação e valorização da biodiversidade e dos povos tradicionais da floresta.", "Promover a região como um destino turístico de baixo custo.", "Demonstrar o crescimento da indústria na região Norte do país."], 
-                correct: 1 
-            },
-            { 
-                question: "O conceito de economia circular é uma das chaves para um futuro mais sustentável. Em uma economia circular, qual é o principal objetivo no ciclo de vida de um produto?", 
-                options: ["Aumentar a produção em larga escala para reduzir o custo final.", "Minimizar o desperdício, reutilizando, reparando e reciclando materiais.", "Descartar produtos e embalagens de forma segura, sem reciclagem.", "Priorizar o uso de materiais virgens em vez dos reciclados."], 
-                correct: 1 
-            },
-            { 
-                question: "Qual é a principal forma de colheita do açaí que contribui para a preservação da Floresta Amazônica?", 
-                options: ["A colheita manual e sustentável, que mantém a árvore de pé.", "O corte total da palmeira para facilitar a retirada dos frutos.", "O uso de máquinas que desmatam a área ao redor.", "O cultivo da palmeira em grandes plantações de monocultura"], 
-                correct: 0 
-            },
-            { 
-                question: "Qual é o principal gás do efeito estufa?", 
-                options: ["Oxigênio", "Nitrogênio", "Dióxido de carbono (CO2)", "Hidrogênio"], 
-                correct: 2 
-            },
-            { 
-                question: "O efeito estufa natural é essencial para a vida na Terra. Qual é sua principal função?", 
-                options: ["Desviar raios solares para longe da Terra.", "Aumentar a temperatura global em excesso.", "Manter o planeta com uma temperatura ideal para a vida.", "Causar a destruição da camada de ozônio."], 
-                correct: 2 
-            },
-            { 
-                question: "Qual é o nome do fenômeno onde a Floresta Amazônica transporta grandes massas de vapor de água, que ajudam a levar chuva para outras partes do Brasil e da América do Sul?", 
-                options: ["Rios voadores", "Ventos da floresta", "Correntes tropicais", "Umidade concentrada"], 
-                correct: 0 
-            },
-            { 
-                question: "Qual é a principal característica da moradia das populações ribeirinhas, adaptada ao ambiente de rios e cheias?", 
-                options: ["Palafitas, construções sobre estacas", "Casas de tijolos em áreas elevadas.", "Apartamentos em prédios altos.", "Tendas feitas de lona"], 
-                correct: 0 
-            },
-            { 
-                question: "A preservação da natureza é fundamental para a saúde do planeta e dos seres vivos. Qual é um dos principais benefícios diretos da conservação das florestas?", 
-                options: ["Melhora da qualidade do ar e regulação do clima.", "Aumento da poluição do ar nas cidades.", "Aumento do aquecimento global.", "Diminuição da biodiversidade local."], 
-                correct: 0 
-            },
-            { 
-                question: "Qual ingrediente de sabor azedo, muito usado na culinária paraense, é o caldo de uma raiz?", 
-                options: ["Cupuaçu", "Tucupi", "Açaí", "Tapioca"], 
-                correct: 1 
-            },
-            { 
-                question: "O que é Círio de Nossa Senhora de Nazaré?", 
-                options: ["É uma grandiosa festa religiosa e cultural que ocorre anualmente em Belém do Pará, reunindo milhões de pessoas em celebração à Virgem de Nazaré.", "É uma festa de música e dança folclórica de Belém.", "É uma feira de artesanato típica da Amazônia.", "É uma competição esportiva de canoagem nos rios da Amazônia."], 
-                correct: 0 
-            }
+            { question: "A escolha de Belém, no Pará, como sede da COP 30, envia uma mensagem global. Qual é o principal objetivo de realizar uma Conferência do Clima na Amazônia?", options: ["Incentivar a exploração de recursos naturais não-renováveis.", "Discutir a preservação e valorização da biodiversidade e dos povos tradicionais da floresta.", "Promover a região como um destino turístico de baixo custo.", "Demonstrar o crescimento da indústria na região Norte do país."], correct: 1 },
+            { question: "O conceito de economia circular é uma das chaves para um futuro mais sustentável. Em uma economia circular, qual é o principal objetivo no ciclo de vida de um produto?", options: ["Aumentar a produção em larga escala para reduzir o custo final.", "Minimizar o desperdício, reutilizando, reparando e reciclando materiais.", "Descartar produtos e embalagens de forma segura, sem reciclagem.", "Priorizar o uso de materiais virgens em vez dos reciclados."], correct: 1 },
+            { question: "Qual é a principal forma de colheita do açaí que contribui para a preservação da Floresta Amazônica?", options: ["A colheita manual e sustentável, que mantém a árvore de pé.", "O corte total da palmeira para facilitar a retirada dos frutos.", "O uso de máquinas que desmatam a área ao redor.", "O cultivo da palmeira em grandes plantações de monocultura"], correct: 0 },
+            { question: "Qual é o principal gás do efeito estufa?", options: ["Oxigênio", "Nitrogênio", "Dióxido de carbono (CO2)", "Hidrogênio"], correct: 2 },
+            { question: "O efeito estufa natural é essencial para a vida na Terra. Qual é sua principal função?", options: ["Desviar raios solares para longe da Terra.", "Aumentar a temperatura global em excesso.", "Manter o planeta com uma temperatura ideal para a vida.", "Causar a destruição da camada de ozônio."], correct: 2 },
+            { question: "Qual é o nome do fenômeno onde a Floresta Amazônica transporta grandes massas de vapor de água, que ajudam a levar chuva para outras partes do Brasil e da América do Sul?", options: ["Rios voadores", "Ventos da floresta", "Correntes tropicais", "Umidade concentrada"], correct: 0 },
+            { question: "Qual é a principal característica da moradia das populações ribeirinhas, adaptada ao ambiente de rios e cheias?", options: ["Palafitas, construções sobre estacas", "Casas de tijolos em áreas elevadas.", "Apartamentos em prédios altos.", "Tendas feitas de lona"], correct: 0 },
+            { question: "A preservação da natureza é fundamental para a saúde do planeta e dos seres vivos. Qual é um dos principais benefícios diretos da conservação das florestas?", options: ["Melhora da qualidade do ar e regulação do clima.", "Aumento da poluição do ar nas cidades.", "Aumento do aquecimento global.", "Diminuição da biodiversidade local."], correct: 0 },
+            { question: "Qual ingrediente de sabor azedo, muito usado na culinária paraense, é o caldo de uma raiz?", options: ["Cupuaçu", "Tucupi", "Açaí", "Tapioca"], correct: 1 },
+            { question: "O que é Círio de Nossa Senhora de Nazaré?", options: ["É uma grandiosa festa religiosa e cultural que ocorre anualmente em Belém do Pará, reunindo milhões de pessoas em celebração à Virgem de Nazaré.", "É uma festa de música e dança folclórica de Belém.", "É uma feira de artesanato típica da Amazônia.", "É uma competição esportiva de canoagem nos rios da Amazônia."], correct: 0 }
         ];
 
         let questions_shuffled = [];
@@ -256,15 +212,12 @@
             while (currentIndex !== 0) {
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [
-                    array[randomIndex], array[currentIndex]
-                ];
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
             }
             return array;
         }
 
         // --- Funções de Navegação e Início do Jogo ---
-
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
@@ -279,10 +232,7 @@
             score = 0;
             currentQuestionIndex = 0;
             document.getElementById('scoreValue').textContent = score;
-
-            // Embaralha a ordem das perguntas
             questions_shuffled = shuffleArray([...questions]);
-
             loadQuestion();
             showScreen('quizScreen');
         }
@@ -300,10 +250,7 @@
             const container = document.getElementById('optionsContainer');
             container.innerHTML = '';
             
-            // Embaralha as opções de resposta
             let shuffled_options = shuffleArray([...original_q.options]);
-
-            // Encontra a nova posição da resposta correta
             let new_correct_index = shuffled_options.findIndex(option => option === original_q.options[original_q.correct]);
             
             shuffled_options.forEach((option, i) => {
@@ -321,7 +268,6 @@
         function selectAnswer(selectedIndex, correctIndex) {
             const options = document.querySelectorAll('.option');
             const feedback = document.getElementById('feedback');
-
             options.forEach(o => o.onclick = null);
 
             if (selectedIndex === correctIndex) {
@@ -357,9 +303,9 @@
             showScreen('finalScreen');
             document.getElementById('finalScore').textContent = score;
             let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' : 
-                            score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
-                            score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
-                            score >= 40 ? 'No caminho certo! Estude mais!' : 'Não desista!';
+                                 score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
+                                 score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
+                                 score >= 40 ? 'No caminho certo! Estude mais!' : 'Não desista!';
             document.getElementById('finalMessage').textContent = msg;
         }
     </script>
