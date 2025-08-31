@@ -14,7 +14,7 @@ O jogo foi desenvolvido como um projeto para o blog https://gamesqueincluem.blog
 
 ## Como Jogar
 
-1.  Acesse o link do jogo: [Cole aqui o link do GitHub Pages]
+1.  Acesse o link do jogo:https://github.com/VitoriaCassia/Trilha_do_Curupira_Quiz
 2.  Clique em "INICIAR" para ver as instruções.
 3.  Responda às 10 perguntas de múltipla escolha.
 4.  Ganhe pontos por cada acerto e descubra a sua pontuação final!
