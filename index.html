@@ -103,7 +103,8 @@
 
 
  /*
- * Alterações para telas menores (celulares).
+ * Ajustes para telas menores (celulares).
+ * Este é o código mais recente, completo e corrigido para todos os feedbacks.
  */
 @media (max-width: 600px) {
     body {
@@ -122,10 +123,11 @@
         justify-content: flex-start;
     }
     
+    /* Título e subtítulo na tela inicial */
     .title {
         font-size: 2.5rem;
         margin-bottom: 10px;
-        text-align: center; /* Adicionado para centralizar o texto */
+        text-align: center;
     }
     
     .subtitle {
@@ -134,14 +136,14 @@
         margin-bottom: 20px;
     }
 
-    /* Tela principal - centralizada */
+    /* Tela principal - Continua centralizada para melhor visual */
     .main-menu {
         justify-content: center;
     }
 
     /* TELA DE INSTRUÇÕES */
     .instructions-screen {
-        padding: 15px;
+        padding: 20px;
         overflow-y: auto; 
     }
     
@@ -152,14 +154,39 @@
     }
 
     .instructions-text {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         margin-right: 0;
         margin-bottom: 20px;
     }
     
+    /* Ajuste para o SVG do Curupira na tela de instruções */
+    .instructions-content > div:first-of-type {
+        margin-bottom: 0; /* Remove a margem extra do SVG */
+        width: 120px; /* Reduz o tamanho do SVG */
+        height: 120px; /* Reduz o tamanho do SVG */
+    }
+
+    /* Ajuste para os botões da tela de instruções */
+    .instructions-buttons {
+        margin-top: 15px; /* Reduz a margem superior dos botões */
+    }
+
     /* TELA DE PERGUNTAS */
     .quiz-screen {
         padding: 20px 15px;
+    }
+
+    .quiz-header {
+        margin-bottom: 20px; /* Reduz a margem inferior do cabeçalho */
+    }
+
+    .score {
+        font-size: 1.2rem; /* Reduz o tamanho da fonte do score */
+        padding: 8px 15px; /* Ajusta o padding do score */
+    }
+
+    .question-counter {
+        font-size: 1rem; /* Reduz o tamanho da fonte do contador */
     }
 
     .question {
@@ -171,6 +198,11 @@
         grid-template-columns: 1fr;
         gap: 10px;
     }
+    
+    .option {
+        font-size: 0.85rem; /* Reduz o tamanho da fonte das opções */
+        padding: 12px; /* Ajusta o padding das opções */
+    }
 
     /* TELA DE CRÉDITOS */
     .credits-screen {
@@ -180,6 +212,15 @@
 
     .credits-content {
         padding: 20px;
+    }
+    
+    .credits-title {
+        font-size: 2rem; /* Reduz o tamanho do título de créditos */
+        margin-bottom: 20px;
+    }
+
+    .credits-text {
+        font-size: 1rem; /* Reduz o tamanho do texto de créditos */
     }
 }
 
@@ -196,7 +237,6 @@
         font-size: 4rem;
     }
 }
-
 
                 
 
