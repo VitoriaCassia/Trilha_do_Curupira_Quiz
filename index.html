@@ -102,10 +102,9 @@
 
 
 
-        
-/*
- * Alterações para garantir que o layout se adapte a telas menores (celulares).
- * Este código substitui o bloco @media anterior.
+ /*
+ * Alterações para telas menores (celulares).
+ * Este é o código mais recente, completo e corrigido.
  */
 @media (max-width: 600px) {
     body {
@@ -121,8 +120,19 @@
     }
 
     .screen {
-        /* Alinha o conteúdo ao topo em vez de centralizar */
         justify-content: flex-start;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-align: center; /* Adicionado para centralizar o texto */
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     /* Tela principal - Continua centralizada para melhor visual */
@@ -133,14 +143,13 @@
     /* TELA DE INSTRUÇÕES */
     .instructions-screen {
         padding: 20px;
-        /* Permite rolagem dentro da tela de instruções caso o conteúdo não caiba */
         overflow-y: auto; 
     }
     
     .instructions-content {
         flex-direction: column;
         align-items: center;
-        padding-top: 0; /* Remove o padding superior */
+        padding-top: 0;
     }
 
     .instructions-text {
@@ -167,7 +176,6 @@
     /* TELA DE CRÉDITOS */
     .credits-screen {
         padding: 20px;
-        /* Permite rolagem caso o conteúdo não caiba */
         overflow-y: auto; 
     }
 
@@ -178,7 +186,6 @@
 
 /*
  * Estilos para telas de computador/laptop.
- * Mantivemos este bloco para telas maiores.
  */
 @media (min-width: 1024px) {
     .game-container {
