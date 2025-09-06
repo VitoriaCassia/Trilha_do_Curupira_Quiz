@@ -102,13 +102,11 @@
 
 
 
- /*
- * Ajustes para telas menores (celulares).
- */
+/* Ajustes para telas menores (celulares). */
 @media (max-width: 600px) {
     body {
         padding: 10px;
-        align-items: flex-start;
+        align-items: flex-start; /* Alinha ao topo para telas pequenas */
     }
 
     .game-container {
@@ -119,16 +117,16 @@
     }
 
     .screen {
-        justify-content: flex-start;
+        justify-content: flex-start; /* Garante que o conteúdo comece no topo */
     }
-    
+
     /* Título e subtítulo na tela inicial */
     .title {
         font-size: 2.5rem;
         margin-bottom: 10px;
         text-align: center;
     }
-    
+
     .subtitle {
         font-size: 1.2rem;
         text-align: center;
@@ -142,22 +140,31 @@
 
     /* TELA DE INSTRUÇÕES */
     .instructions-screen {
-        padding: 10px;
-        overflow-y: auto; 
+        padding: 20px;
+        overflow-y: auto; /* Permite rolagem vertical se o conteúdo for maior que a tela */
+        display: flex; /* Garante que o flexbox funcione corretamente */
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        align-items: center; /* Centraliza horizontalmente os itens */
+        justify-content: flex-start; /* Alinha o conteúdo ao topo */
     }
-    
+
     .instructions-content {
-        flex-direction: column;
+        flex-direction: column; /* Empilha o texto e o SVG */
         align-items: center;
         padding-top: 0;
+        width: 100%; /* Garante que ocupe toda a largura disponível */
     }
 
     .instructions-text {
         font-size: 0.9rem;
         margin-right: 0;
         margin-bottom: 20px;
+        width: 100%; /* Ocupa a largura total */
+        box-sizing: border-box; /* Inclui padding e border na largura total */
+        text-align: left; /* Garante que o texto fique alinhado à esquerda */
+        max-width: 400px; /* Limita a largura máxima para melhor legibilidade */
     }
-    
+
     /* Ajuste para o SVG do Curupira na tela de instruções */
     .instructions-content > div:first-of-type {
         margin-bottom: 0; /* Remove a margem extra do SVG */
@@ -168,6 +175,13 @@
     /* Ajuste para os botões da tela de instruções */
     .instructions-buttons {
         margin-top: 15px; /* Reduz a margem superior dos botões */
+        width: 100%; /* Ocupa a largura total */
+        align-items: center; /* Centraliza os botões */
+    }
+
+    .btn-play, .btn-return {
+        width: 80%; /* Ajusta a largura dos botões */
+        max-width: 250px; /* Limita a largura máxima dos botões */
     }
 
     /* TELA DE PERGUNTAS */
@@ -192,12 +206,12 @@
         font-size: 0.9rem;
         margin-bottom: 15px;
     }
-    
+
     .options {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Transforma em uma única coluna */
         gap: 10px;
     }
-    
+
     .option {
         font-size: 0.85rem; /* Reduz o tamanho da fonte das opções */
         padding: 12px; /* Ajusta o padding das opções */
@@ -206,13 +220,20 @@
     /* TELA DE CRÉDITOS */
     .credits-screen {
         padding: 20px;
-        overflow-y: auto; 
+        overflow-y: auto; /* Permite rolagem vertical */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* Alinha o conteúdo ao topo */
     }
 
     .credits-content {
         padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
     }
-    
+
     .credits-title {
         font-size: 2rem; /* Reduz o tamanho do título de créditos */
         margin-bottom: 20px;
