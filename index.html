@@ -140,25 +140,55 @@
         justify-content: center;
     }
 
-    /* TELA DE INSTRUÇÕES */
-    .instructions-screen {
-        padding: 20px;        
-        overflow-y: auto; 
-    }
-    
-    .instructions-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding-top: 0 ;
-    }
+   /* TELA DE INSTRUÇÕES */
+.instructions-screen {
+    padding: 20px;        
+    overflow-y: auto; 
+}
 
-    .instructions-text {
-        font-size: 0.9rem;
-        justify-content: space-between;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
+.instructions-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    text-align: justify; /* alinhamento justificado do conteúdo */
+    width: 100%;
+}
+
+/* Título "Bora de Trilha" */
+.instructions-title {
+    font-size: 1.8rem;
+    text-align: center;
+    white-space: normal;      /* Permite que o texto quebre em linhas */
+    word-wrap: break-word;    /* Quebra palavras muito grandes */
+    margin-bottom: 15px;
+}
+
+/* Texto de instruções */
+.instructions-text {
+    font-size: 0.95rem;
+    line-height: 1.4;         /* Melhora legibilidade */
+    text-align: justify;      /* Texto alinhado em blocos */
+    margin: 0 10px 20px 10px;
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+/* Ajuste para os botões da tela de instruções */
+.instructions-buttons {
+    display: flex;
+    flex-direction: column;   /* Empilha os botões */
+    align-items: center;
+    gap: 10px;                /* Espaçamento entre "Jogar" e "Retornar" */
+    margin-top: 15px;
+    width: 100%;
+}
+
+.instructions-buttons button {
+    width: 80%;              /* Botões mais largos no mobile */
+    max-width: 250px;
+}
     
     /* Ajuste para o SVG do Curupira na tela de instruções */
     .instructions-content > div:first-of-type {
