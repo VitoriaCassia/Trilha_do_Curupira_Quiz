@@ -144,17 +144,18 @@
     .instructions-screen {
         overflow-y: auto;
         padding: 20px 15px;
-        box-sizing: border-box;
-
-                 
+                         
     }
     
     .instructions-content {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 15px;
-        justify-content: center; 
-    }
+         display: flex;
+         flex-direction: column;
+         align-items: center; /* centraliza tudo no eixo horizontal */
+         justify-content: center; /* centraliza no eixo vertical */
+         max-width: 600px; /* largura máxima para não esticar muito no desktop */
+         width: 100%;
+         text-align: justify; /* texto justificado */
+         }
 
     .instructions-text {
         font-size: 1.0rem;
