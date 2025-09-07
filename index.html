@@ -140,70 +140,115 @@
         justify-content: center;
     }
 
-   /* TELA DE INSTRUÇÕES */
- background: #fff;
-      width: 100%;
-      max-width: 680px;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  /* ===========================
+   OVERRIDE: Corrige Tela de Instruções no MOBILE
+   Cole este bloco no final do seu CSS (antes do </style>)
+   =========================== */
+
+@media (max-width: 700px) {
+  /* força o painel branco a usar a largura real do celular */
+  .instructions-screen {
+    width: calc(100% - 24px) !important;
+    max-width: 100% !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  /* garante que conteúdo ocupe toda largura e não seja comprimido */
+  .instructions-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important; /* evita shrink em flex */
+    gap: 12px !important;
+  }
+
+  /* força ilustração em cima do título no mobile */
+  .instructions-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .instructions-illustration {
+    flex: 0 0 auto !important;
+    width: 110px !important;
+    height: 110px !important;
+    min-width: 0 !important;
+  }
+
+  /* OVERRIDES fortes para o título (evita texto em coluna) */
+  .instructions-title {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.6rem !important;
+    line-height: 1.08 !important;
+    text-align: center !important;
+
+    /* evita qualquer escrita vertical/quebra forçada */
+    writing-mode: horizontal-tb !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+    letter-spacing: normal !important;
+  }
+
+  /* Texto principal com largura total e quebra normal de palavras */
+  .instructions-text {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 6px 10px 6px !important;
+    text-align: justify !important;
+
+    /* OVERRIDES que evitam quebra letra-a-letra */
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+  }
+
+  /* garante que nenhum elemento filho force escrita vertical */
+  .instructions-screen, 
+  .instructions-screen * {
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
+  /* Botões empilhados, centralizados e responsivos */
+  .instructions-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+
+  .instructions-buttons button {
+    width: 85% !important;
+    max-width: 320px !important;
+    box-sizing: border-box !important;
+  }
 }
 
-.instructions-content {
-    display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-}
-
-/* Título "Bora de Trilha" */
-.instructions-title {
-   margin: 0;
-      font-size: 1.9rem;
-      font-weight: 900;
-      color: #1f3b2e;
-      width: 100%;
-      min-width: 0;
-      white-space: normal;
-      word-break: normal;
-      overflow-wrap: normal;
-      writing-mode: horizontal-tb;
-      letter-spacing: normal;
-}
-
-/* Texto de instruções */
+/* Se quiser um fallback global para evitar que algum reset quebre tudo */
+.instructions-title,
 .instructions-text {
-    font-size: 1rem;
-    line-height: 1.5; /* aumenta o espaçamento entre linhas */
-    margin: 0;
-    text-align: justify; 
-    white-space: normal;
-    word-break: break-word; /* quebra apenas quando necessário */
-    overflow-wrap: break-word; 
-    max-width: 100%; /* usa toda a largura disponível */
-    display: block; /* garante que ocupe uma linha inteira */
-}
-
-/* Ajuste para os botões da tela de instruções */
-.instructions-buttons {
-    display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      width: 100%;
-      margin-top: 4px;
-}
-
-.instructions-buttons button {
-    width: 85%;
-      max-width: 260px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: none;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
 }
     
     /* Ajuste para o SVG do Curupira na tela de instruções */
