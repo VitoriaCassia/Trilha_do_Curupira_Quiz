@@ -174,13 +174,14 @@
 /* Texto de instruções */
 .instructions-text {
     font-size: 1rem;
-      line-height: 1.00;
-      margin: 0;
-      text-align: justify;
-      white-space: normal;
-      word-break: normal;
-      overflow-wrap: break-word;
-      max-width: 60%;
+    line-height: 1.5; /* aumenta o espaçamento entre linhas */
+    margin: 0;
+    text-align: justify; 
+    white-space: normal;
+    word-break: break-word; /* quebra apenas quando necessário */
+    overflow-wrap: break-word; 
+    max-width: 100%; /* usa toda a largura disponível */
+    display: block; /* garante que ocupe uma linha inteira */
 }
 
 /* Ajuste para os botões da tela de instruções */
