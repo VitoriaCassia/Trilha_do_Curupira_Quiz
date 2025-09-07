@@ -141,53 +141,67 @@
     }
 
    /* TELA DE INSTRUÇÕES */
-.instructions-screen {
-    padding: 20px;        
-    overflow-y: auto; 
+ background: #fff;
+      width: 100%;
+      max-width: 680px;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .instructions-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 0;
-    text-align: justify; /* alinhamento justificado do conteúdo */
-    width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
 }
 
 /* Título "Bora de Trilha" */
 .instructions-title {
-    font-size: 1.2rem;
-    text-align: center;
-    white-space: normal;      /* Permite que o texto quebre em linhas */
-    word-wrap: break-word;    /* Quebra palavras muito grandes */
-    margin-bottom: 15px;
+   margin: 0;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #1f3b2e;
+      width: 100%;
+      min-width: 0;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: normal;
+      writing-mode: horizontal-tb;
+      letter-spacing: normal;
 }
 
 /* Texto de instruções */
 .instructions-text {
-    font-size: 0.95rem;
-    line-height: 1.4;         /* Melhora legibilidade */
-    text-align: justify;      /* Texto alinhado em blocos */
-    margin: 0 10px 20px 10px;
-    white-space: normal;
-    word-wrap: break-word;
-    max-width: 100%;
+    font-size: 1rem;
+      line-height: 1.45;
+      margin: 0;
+      text-align: justify;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: break-word;
+      max-width: 100%;
 }
 
 /* Ajuste para os botões da tela de instruções */
 .instructions-buttons {
     display: flex;
-    flex-direction: column;   /* Empilha os botões */
-    align-items: center;
-    gap: 10px;                /* Espaçamento entre "Jogar" e "Retornar" */
-    margin-top: 15px;
-    width: 100%;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      margin-top: 4px;
 }
 
 .instructions-buttons button {
-    width: 80%;              /* Botões mais largos no mobile */
-    max-width: 250px;
+    width: 85%;
+      max-width: 260px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
 }
     
     /* Ajuste para o SVG do Curupira na tela de instruções */
