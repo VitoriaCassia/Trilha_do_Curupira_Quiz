@@ -103,75 +103,77 @@
 
 
  /*
- * Ajustes para telas menores (celulares).
- */
-@media (max-width: 500px) {
-    body {
-        padding:10px;
-        align-items: flex-start;
-    }
+ /* TELA DE INSTRUÇÕES - AJUSTES PARA CELULARES */
 
-    .game-container {
-        height: 95vh;
-        max-height: 800px;
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .screen {
-        justify-content: flex-start;
-    }
-    
-    /* Título e subtítulo na tela inicial */
-    .title {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Tela principal - Centralizada para melhor visual */
-    .main-menu {
-        justify-content: center;
-    }
-
-
-   /* TELA DE INSTRUÇÕES */
-    
-   .instructions-screen {
-   padding: 20px;
-   overflow-y: auto; 
-
+.instructions-screen {
+    padding: 20px;
+    overflow-y: auto;
+    /* Para celulares, podemos garantir que a tela ocupe a largura disponível */
+    width: 100%;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
 }
 
 .instructions-content {
-     padding: 20px;
-
+    display: flex;
+    flex-direction: column; /* Mantém o empilhamento vertical, que é comum em celulares */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    /* Definimos uma largura máxima para evitar que o conteúdo fique muito esticado */
+    max-width: 300px; /* Ajuste conforme necessário */
+    width: 100%; /* Garante que ocupe a largura disponível até o max-width */
+    margin: 0 auto; /* Centraliza o bloco .instructions-content na tela */
+    padding: 15px; /* Adiciona um padding interno para o conteúdo */
+    box-sizing: border-box;
 }
 
 .instructions-text {
-  font-size: 1rem; 
-    
+    font-size: 1rem;
+    line-height: 1.6; /* Aumenta o espaçamento entre linhas para melhor leitura */
+    text-align: justify; /* Justifica o texto para uma aparência mais limpa */
+    word-break: break-word; /* Essencial para quebras de linha corretas em palavras longas */
+    margin-bottom: 20px; /* Espaço abaixo do texto */
+    width: 100%; /* O texto deve ocupar toda a largura disponível do seu container */
+    max-width: 400px; /* Pode ser ajustado, mas garante que não estique demais */
+    box-sizing: border-box;
 }
 
 /* Ajuste para o SVG do Curupira na tela de instruções */
 .instructions-content > div:first-of-type {
-    margin-bottom: 20;
-    width: 100px;
-    height: 100px;
-    max-width: 100%;
+    margin-bottom: 20px; /* Adiciona um espaço abaixo do SVG */
+    width: 100px; /* Mantém um tamanho razoável */
+    height: 100px; /* Mantém um tamanho razoável */
+    max-width: 100%; /* Garante que o SVG não ultrapasse a largura do seu container */
+    display: block; /* Garante que o SVG seja tratado como um bloco */
 }
 
 /* Ajuste para os botões da tela de instruções */
 .instructions-buttons {
-    
-  margin-top: 5px; /* Reduz a margem superior dos botões */
-    
+    margin-top: 15px; /* Espaço acima dos botões */
+    width: 100%; /* Botões ocupando a largura total */
+    display: flex;
+    flex-direction: column; /* Empilha os botões verticalmente */
+    gap: 10px; /* Espaço entre os botões */
+}
+
+/* Estilos adicionais para os botões (se necessário) */
+.instructions-buttons button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.instructions-buttons .jogar-button {
+    background-color: #FF8C00; /* Laranja */
+    color: white;
+}
+
+.instructions-buttons .retornar-button {
+    background-color: #8A2BE2; /* Roxo */
+    color: white;
 }
 
  
