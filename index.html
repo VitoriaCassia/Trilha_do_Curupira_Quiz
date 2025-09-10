@@ -117,7 +117,7 @@
     flex-direction: column;
     align-items: center; /* Centraliza horizontalmente */
     justify-content: center; /* Centraliza verticalmente */
-    max-width: 300px; /* Largura máxima para não esticar muito */
+    max-width: 300px; 
     width: 100%;
 }
 
@@ -125,14 +125,14 @@
     font-size: 1rem;
     margin: 15px 0;
     width: 100%;
-    text-align: justify; /* Justifica o texto */
-    word-break: break-word; /* Garante quebra correta em celulares */
-    line-height: 1.5; /* Melhora a legibilidade com espaçamento entre linhas */
+    text-align: justify;
+    word-break: break-word; 
+    line-height: 1.5; 
 }
 
 /* Ajuste para o SVG do Curupira */
 .instructions-content > div:first-of-type {
-    margin-bottom: 20px; /* Ajuste conforme necessário */
+    margin-bottom: 20px; 
     width: 100px;
     height: 100px;
     max-width: 100%;
@@ -146,27 +146,26 @@
 /* --- Media Query para Telas de Celular --- */
 @media (max-width: 768px) {
     .instructions-content {
-        /* Se você precisa de algum ajuste específico para o container no celular */
-        padding: 10px; /* Reduz o padding interno se necessário */
+        /* 
+        padding: 10px; /* Reduz o padding interno */
     }
 
     .instructions-text {
-        /* A regra 'word-break: break-word;' já ajuda muito aqui */
-        /* Se o problema for o alinhamento ou espaço, podemos ajustar */
-        text-align: left; /* Tente 'left' se 'justify' estiver criando espaços estranhos no celular */
-        margin-right: 0; /* Remove margem direita extra se houver */
-        margin-left: 0; /* Remove margem esquerda extra se houver */
+        
+        text-align: left; 
+        margin-right: 0; 
+        margin-left: 0; 
     }
 
-    /* Ajustes específicos para o SVG no celular, se necessário */
+    /* Ajustes específicos para o SVG no celular */
     .instructions-content > div:first-of-type {
-        width: 80px; /* Pode reduzir um pouco mais se for o caso */
+        width: 60px; 
         height: 80px;
     }
 
-    /* Ajustes específicos para os botões no celular, se necessário */
+    /* Ajustes específicos para os botões no celular /*
     .instructions-buttons {
-        margin-top: 10px; /* Ajuste a margem entre texto e botões */
+        margin-top: 10px; 
 }
 
  
