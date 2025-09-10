@@ -25,7 +25,7 @@ O jogo foi desenvolvido como um projeto para o blog https://gamesqueincluem.blog
 * Vitória de Cássia Rodrigues (Game Dev e Game Designer)
 * Parceria: Inteligência Artificial
 
-O Curupira e todos os elementos visuais do jogo foram criados diretamente com código **SVG**, sem a necessidade de arquivos de imagem externos.
+O Curupira e todos os elementos visuais do jogo foram criados diretamente com código **SVG**, sem a necessidade de arquivos de imagem externas.
 
 
 
