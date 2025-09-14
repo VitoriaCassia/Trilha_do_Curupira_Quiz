@@ -1,280 +1,386 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <br>
+
     <title>Trilha do Curupira</title>
 
     <style>
 
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
 
         body { font-family: 'Roboto_Condensed-Black'; background: linear-gradient(135deg, #2d5016, #4a7c59); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
 
+
         .game-container { width: 100%; max-width: 800px; height: 600px; background: linear-gradient(to bottom, #87CEEB, #90EE90); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+
 
         .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
 
+
         .screen.active { display: flex; }
+
 
         .main-menu { flex-direction: column; align-items: center; justify-content: center; position: relative; }
 
+
         .main-menu::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: #228B22; clip-path: ellipse(100% 60% at 50% 100%); }
+
 
         .title { font-size: 3.5rem; color: #2d5016; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); margin-bottom: 20px; z-index: 10; }
 
+
         .subtitle { font-size: 1.5rem; color: #1a3009; margin-bottom: 40px; z-index: 10; }
+
 
         .character { width: 120px; height: 120px; margin-bottom: 30px; z-index: 10; }
 
+
         .menu-buttons { display: flex; flex-direction: column; gap: 15px; z-index: 10; }
+
 
         .btn { padding: 15px 40px; font-size: 1.3rem; font-weight: bold; color: white; border: none; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
+
         .btn-start { background: linear-gradient(45deg, #0056b3, #007BFF); }
+
 
         .btn-credits { background: linear-gradient(45deg, #4ECDC4, #FFC300); }
 
+
         .btn-exit { background: linear-gradient(45deg, #E74C3C, #8B0000); }
+
 
         .btn-play { background: #FF8C00; }
 
+
         .btn-return { background: linear-gradient(45deg, #9B59B6, #8E44AD); }
+
 
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 
+
         .instructions-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); padding: 40px; }
+
 
         .forest-bg { position: absolute; bottom: 0; left: 0; right: 0; height: 400px; background: linear-gradient(to top, #228B22, #32CD32); clip-path: ellipse(100% 80% at 50% 100%); }
 
+
         .instructions-content { font-size: 0.8rem; display: flex; height: 100%; align-items: center; justify-content: space-between; z-index: 10; position: relative; }
+
 
         .instructions-text { flex: 1; background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; margin-right: 30px; font-size: 1.0rem; line-height: 1.6; color: #2d5016; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
+
         .instructions-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+
 
         .quiz-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; padding: 40px; }
 
+
         .quiz-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; padding: 40px 40px 80px; }
+
 
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
 
+
         .score { font-size: 1.3rem; font-weight: bold; color: #2d5016; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 20px; }
+
 
         .question-counter { font-size: 1.2rem; color: #2d5016; font-weight: bold; }
 
+
         .question-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
 
         .question { font-size: 1.0rem; color: #2d5016; margin-bottom: 25px; font-weight: bold; text-align: center; }
 
+
         .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+
 
         .option { padding: 15px; background: linear-gradient(45deg, #3498DB, #2980B9); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease; }
 
+
         .option:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
 
         .option.correct { background: linear-gradient(45deg, #27AE60, #2ECC71); }
 
+
         .option.incorrect { background: linear-gradient(45deg, #E74C3C, #C0392B); }
+
 
         .feedback { text-align: center; font-size: 1.2rem; font-weight: bold; margin: 20px 0; min-height: 30px; }
 
+
         .feedback.correct { color: #27AE60; }
+
 
         .feedback.incorrect { color: #E74C3C; }
 
+
         .final-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+
+
 
         .final-score { font-size: 4rem; color: #2d5016; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
 
+
+
         .final-message { font-size: 1.5rem; color: #1a3009; margin-bottom: 40px; }
+
+
 
         .credits-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); padding: 40px; flex-direction: column; justify-content: center; align-items: center; }
 
+
         .credits-content { background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 15px; text-align: center; }
+
 
         .credits-title { font-size: 2.5rem; color: #2d5016; margin-bottom: 30px; }
 
+
         .credits-text { font-size: 1.2rem; color: #2d5016; line-height: 1.8; margin-bottom: 30px; }
 
-       
+
  /*
+
   * Ajustes para telas menores (celulares).
+
  */
+
 @media (max-width: 600px) {
+
     body {
+
         padding: 10px;
+
         align-items: flex-start;
+
     }
 
+
     .game-container {
+
         height: 95vh;
+
         max-height: 800px;
+
         width: 100%;
+
         border-radius: 10px;
+
         overflow-y: auto; 
-        
-        
-        
-        
+
+
+
     }
+
 
     .screen {
+
         justify-content: flex-start;
+
     }
-    
+
+
     /* Título e subtítulo na tela inicial */
+
     .title {
+
         font-size: 2.5rem;
+
         margin-bottom: 10px;
+
         text-align: center;
+
     }
-    
+
+
     .subtitle {
+
         font-size: 1.2rem;
+
         text-align: center;
+
         margin-bottom: 20px;
+
     }
+
+
 
     /* Tela principal - Centralizada para melhor visual */
+
     .main-menu {
+
         justify-content: center;
+
     }
 
-    
+
+
           /* TELA DE INSTRUÇÕES */
+
     .instructions-screen {
+
         padding: 50px;
+
         overflow-y: auto; 
-        
+
+
     }
-    
+
+
     .instructions-content {
+
         flex-direction: column;
+
         align-items: center;
+
         padding-top: 0;
+
         font-size: 0.8rem;
+
         display: flex; 
+
         height: 100%;
+
         justify-content: space-between;
+
         z-index: 10; 
+
         position: relative;
+
         width: 100%;
 
-        
+
+
     }
+
+
 
     .instructions-text {
+
         font-size: 1.0rem;
+
         margin-bottom: 20px;
+
         flex: 1; 
+
         padding: 10px; 
+
         border-radius: 15px;
-        line-height: 1.9; 
+
+        line-height: 1.6; 
+
         max-width: 600px;  
+
         width: 100%; 
-      
-              
-        
-        
+
+
+
     }
-    
+
     /* Ajuste para o SVG do Curupira na tela de instruções */
+
     .instructions-content > div:first-of-type {
+
+        margin-bottom: 0; /* Remove a margem extra do SVG */
+
+        width: 120px; /* Reduz o tamanho do SVG */
+
+        height: 120px; /* Reduz o tamanho do SVG */
+
         margin-bottom: 0; 
+
         width: 100px; 
+
         height: 100px; 
+
     }
+
+
 
     /* Ajuste para os botões da tela de instruções */
-    .instructions-buttons {
-        margin-top: 15px; 
+
+@@ -241,632 +241,632 @@
+
     }
 
-  
-  
- 
-    /* TELA DE PERGUNTAS */
-    .quiz-screen {
-        padding: 20px 15px;
-    }
 
-    .quiz-header {
-        margin-bottom: 20px; /* Reduz a margem inferior do cabeçalho */
-    }
 
-    .score {
-        font-size: 1.2rem; /* Reduz o tamanho da fonte do score */
-        padding: 8px 15px; /* Ajusta o padding do score */
-    }
-
-    .question-counter {
-        font-size: 1rem; /* Reduz o tamanho da fonte do contador */
-    }
-
-    .question {
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-    }
-    
-    .options {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .option {
-        font-size: 0.85rem;
-        padding: 12px; 
-    }
-
-    /* TELA DE CRÉDITOS */
-    .credits-screen {
-        padding: 20px;
-        overflow-y: auto; 
-    }
-
-    .credits-content {
-        padding: 20px;
-    }
-    
     .credits-title {
-        font-size: 1.4rem; 
+
+
+        font-size: 2rem; 
+
+
+        font-size: 1.5rem; 
+
         margin-bottom: 20px;
+
     }
+
 
     .credits-text {
+
         font-size: 1rem; 
+
     }
+
 }
+
+
 
 /*
+
  * Estilos para telas de computador/laptop.
+
  */
+
 @media (min-width: 1024px) {
+
     .game-container {
+
         height: 650px;
+
         max-width: 900px;
+
     }
+
 
     .title {
+
         font-size: 4rem;
+
     }
+
 }
 
-                
+
 
     </style>
 
+
 </head>
+
 
 <body>
 
+
     <div class="game-container">
 
+
         <div class="screen main-menu active" id="mainMenu">
+
+
 
             <h1 class="title">Trilha do Curupira</h1>
 
@@ -282,23 +388,33 @@
 
             <div class="character">
 
+
                 <svg width="120" height="120" viewBox="0 0 200 280">
+
 
                     <ellipse cx="100" cy="180" rx="40" ry="60" fill="#D2691E"/>
 
+
                     <ellipse cx="85" cy="240" rx="12" ry="25" fill="#FF4500"/>
+
 
                     <ellipse cx="115" cy="240" rx="12" ry="25" fill="#FF4500"/>
 
+
                     <ellipse cx="85" cy="260" rx="15" ry="15" fill="#FFD700"/>
+
 
                     <ellipse cx="115" cy="260" rx="15" ry="15" fill="#FFD700"/>
 
+
                     <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
+
 
                     <circle cx="100" cy="120" r="45" fill="#D2691E"/>
 
+
                     <path d="M60,90 Q70,50 80,80 Q90,40 100,70 Q110,35 120,75 Q130,45 140,85" fill="#FF4500"/>
+
 
                     <path d="M70,80 Q80,45 90,75 Q100,30 110,65 Q120,40 130,80" fill="#FFD700"/>
 
@@ -308,11 +424,14 @@
 
                     <circle cx="88" cy="115" r="5" fill="black"/>
 
+
                     <circle cx="112" cy="115" r="5" fill="black"/>
 
                     <ellipse cx="100" cy="125" rx="3" ry="4" fill="#CD853F"/>
 
+
                     <path d="M92,135 Q100,142 108,135" stroke="#8B4513" stroke-width="2" fill="none"/>
+
 
                     <ellipse cx="65" cy="165" rx="15" ry="35" fill="#D2691E"/>
 
@@ -334,6 +453,7 @@
 
                 <button class="btn btn-exit" onclick="exitGame()">SAIR</button>
 
+
             </div>
 
         </div>
@@ -347,20 +467,32 @@
 
                 <div class="instructions-text">
 
+
+
                     <br>
 
                     <h2 style="margin-bottom: 20px; color: #2d5016;font-size: 18px;">BORA DE TRILHA DO CURUPIRA!</h2>
+
                     <p>O Curupira, protetor da floresta Amazônica, precisa da sua ajuda para ensinar sobre sustentabilidade e preservação ambiental!</p>
+
                     <br>
+
                     <p>Neste quiz você encontrará 10 perguntas sobre a Amazônia, meio ambiente e sustentabilidade. Cada resposta correta vale 10 pontos.</p>
+
                     <br>
+
                     <p><strong>Como jogar:</strong></p>
 
+
                     <p>• Você tem uma segunda chance se errar a primeira tentativa</p>
+
                     <p>• Acerte todas as perguntas para conseguir 100 pontos</p>
+
                     <br>
 
+
                 </div>
+
 
                 <div style="display: flex; flex-direction: column; align-items: center;">
 
@@ -374,9 +506,11 @@
 
                             <ellipse cx="115" cy="240" rx="12" ry="25" fill="#FF4500"/>
 
+
                             <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
 
                             <circle cx="100" cy="120" r="45" fill="#D2691E"/>
+
 
                             <path d="M60,90 Q70,50 80,80 Q90,40 100,70 Q110,35 120,75 Q130,45 140,85" fill="#FF4500"/>
 
@@ -398,6 +532,7 @@
 
                             <rect x="75" y="180" width="50" height="30" fill="#FFF8DC" rx="2"/>
 
+
                         </svg>
 
                     </div>
@@ -408,13 +543,18 @@
 
                         <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
 
+
                     </div>
+
 
                 </div>
 
+
             </div>
 
+
         </div>
+
 
         <div class="screen quiz-screen" id="quizScreen">
 
@@ -424,7 +564,9 @@
 
                 <div class="question-counter">Pergunta <span id="currentQuestion">1</span> de 10</div>
 
+
             </div>
+
 
             <div class="question-container">
 
@@ -456,8 +598,8 @@
 
                     <ellipse cx="115" cy="240" rx="12" ry="25" fill="#FF4500"/>
 
-                    <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
 
+                    <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
                     <circle cx="100" cy="120" r="45" fill="#D2691E"/>
 
                     <path d="M60,90 Q70,45 80,80 Q90,35 100,70 Q110,30 120,75 Q130,40 140,85" fill="#FF4500"/>
@@ -500,6 +642,7 @@
 
                     <p>Quiz Educativo sobre Sustentabilidade e Amazônia</p>
 
+
                     <br>
 
                     <p><strong>Desenvolvido por:</strong></p>
@@ -516,167 +659,240 @@
 
                 </div>
 
+
                 <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+
 
             </div>
 
+
         </div>
+
 
     </div>
 
+
     <script>
+
 
         // Array com todas as perguntas e respostas
 
+
         const questions = [
+
 
             { 
 
+
                 question: "Qual é o principal objetivo de realizar uma Conferência das Nações Unidas sobre as Mudanças Climáticas (COP 30) em Belém do Pará?", 
+
+
 
                 options: ["Incentivar a exploração de recursos naturais não-renováveis.", "Discutir a preservação e valorização da biodiversidade e dos povos tradicionais da floresta.", "Promover a região como um destino turístico de baixo custo.", "Demonstrar o crescimento da indústria na região Norte do país."], 
 
                 correct: 1 
 
+
             },
 
+
             { 
+
 
                 question: "Em uma economia circular, qual é o principal objetivo no ciclo de vida de um produto?", 
 
+
                 options: ["Aumentar a produção em larga escala para reduzir o custo final.", "Minimizar o desperdício, reutilizando, reparando e reciclando materiais.", "Descartar produtos e embalagens de forma segura, sem reciclagem.", "Priorizar o uso de materiais virgens em vez dos reciclados."], 
+
 
                 correct: 1 
 
+
             },
 
 
             { 
+
 
                 question: "Qual é a principal forma de colheita do açaí que contribui para a preservação da Floresta Amazônica?", 
 
+
                 options: ["A colheita manual e sustentável, que mantém a árvore de pé.", "O corte total da palmeira para facilitar a retirada dos frutos.", "O uso de máquinas que desmatam a área ao redor.", "O cultivo da palmeira em grandes plantações de monocultura"], 
+
 
                 correct: 0 
 
+
             },
 
-
             { 
+
 
                 question: "Qual é o principal gás do efeito estufa?", 
 
+
                 options: ["Oxigênio", "Nitrogênio", "Dióxido de carbono (CO2)", "Hidrogênio"], 
 
+
                 correct: 2 
+
 
             },
 
 
+
             { 
+
 
                 question: "O efeito estufa natural é essencial para a vida na Terra. Qual é sua principal função?", 
 
+
                 options: ["Desviar raios solares para longe da Terra.", "Aumentar a temperatura global em excesso.", "Manter o planeta com uma temperatura ideal para a vida.", "Causar a destruição da camada de ozônio."], 
+
 
                 correct: 2 
 
+
             },
+
 
             { 
 
+
                 question: "Qual é o nome do fenômeno onde a Floresta Amazônica transporta grandes massas de vapor de água, que ajudam a levar chuva para outras regiões da América do Sul?", 
+
 
                 options: ["Rios voadores", "Ventos da floresta", "Correntes tropicais", "Umidade concentrada"], 
 
                 correct: 0 
 
+
             },
 
 
+
             { 
+
 
                 question: "Qual é a principal característica da moradia das populações ribeirinhas, adaptada ao ambiente de rios e cheias?", 
 
+
                 options: ["Palafitas, construções sobre estacas", "Casas de tijolos em áreas elevadas.", "Apartamentos em prédios altos.", "Tendas feitas de lona"], 
+
 
                 correct: 0 
 
+
             },
 
+
             { 
+
 
                 question: "A preservação da natureza é fundamental para a saúde do planeta e dos seres vivos. Qual é um dos principais benefícios diretos da conservação das florestas?", 
 
+
                 options: ["Melhora da qualidade do ar e regulação do clima.", "Aumento da poluição do ar nas cidades.", "Aumento do aquecimento global.", "Diminuição da biodiversidade local."], 
 
+
                 correct: 0 
+
 
             },
 
 
+
             { 
+
 
                 question: "Qual ingrediente de sabor azedo, muito usado na culinária paraense, é o caldo de uma raiz?", 
 
+
                 options: ["Cupuaçu", "Tucupi", "Açaí", "Tapioca"], 
+
 
                 correct: 1 
 
 
+
             },
+
 
             { 
 
+
                 question: "O que é Círio de Nossa Senhora de Nazaré?", 
+
 
                 options: ["É uma grandiosa festa religiosa e cultural que ocorre anualmente em Belém do Pará em celebração à Virgem de Nazaré.", "É uma festa de música e dança folclórica de Belém.", "É uma feira de artesanato típica da Amazônia.", "É uma competição esportiva de canoagem nos rios da Amazônia."], 
 
+
                 correct: 0 
 
+
             }
+
 
         ];
 
 
+
         let questions_shuffled = [];
+
 
         let currentQuestionIndex = 0;
 
+
         let score = 0;
+
 
         const maxAttempts = 2;
 
+
         let attempts = 0;
 
-        
+
+
         // Função para embaralhar um array (algoritmo Fisher-Yates)
+
 
         function shuffleArray(array) {
 
+
             let currentIndex = array.length, randomIndex;
+
 
             while (currentIndex !== 0) {
 
+
                 randomIndex = Math.floor(Math.random() * currentIndex);
+
 
                 currentIndex--;
 
+
                 [array[currentIndex], array[randomIndex]] = [
 
+
                     array[randomIndex], array[currentIndex]
+
 
 
                 ];
 
 
+
             }
+
 
 
             return array;
 
 
+
         }
+
+
 
 
         // --- Funções de Navegação e Início do Jogo ---
@@ -684,115 +900,165 @@
 
         function showScreen(screenId) {
 
+
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+
 
             document.getElementById(screenId).classList.add('active');
 
+
         }
+
 
 
         function goToMenu() { showScreen('mainMenu'); }
 
+
         function goToInstructions() { showScreen('instructionsScreen'); }
+
 
         function goToCredits() { showScreen('creditsScreen'); }
 
+
         function exitGame() { confirm('Sair do jogo?') && alert('Obrigado por jogar!'); }
+
 
         function startQuiz() {
 
+
             score = 0;
+
 
             currentQuestionIndex = 0;
 
+
             document.getElementById('scoreValue').textContent = score;
 
-            
+
             // Embaralha a ordem das perguntas
+
 
             questions_shuffled = shuffleArray([...questions]);
 
+
             loadQuestion();
 
+
             showScreen('quizScreen');
+
 
         }
 
 
+
         function loadQuestion() {
+
 
             if (currentQuestionIndex >= questions_shuffled.length) {
 
+
                 showFinalScreen();
 
+
                 return;
+
 
             }
 
 
+
             const original_q = questions_shuffled[currentQuestionIndex];
+
 
             document.getElementById('questionText').textContent = original_q.question;
 
+
             document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
 
+
             const container = document.getElementById('optionsContainer');
+
 
             container.innerHTML = '';
 
 
+
             // Embaralha as opções de resposta
+
+
 
             let shuffled_options = shuffleArray([...original_q.options]);
 
 
             // Encontra a nova posição da resposta correta
 
+
             let new_correct_index = shuffled_options.findIndex(option => option === original_q.options[original_q.correct]);
+
 
             shuffled_options.forEach((option, i) => {
 
+
                 const btn = document.createElement('button');
+
 
                 btn.className = 'option';
 
+
                 btn.textContent = option;
+
 
                 btn.onclick = () => selectAnswer(i, new_correct_index);
 
+
                 container.appendChild(btn);
+
 
             });
 
 
+
             document.getElementById('feedback').textContent = '';
 
+
             attempts = 0;
+
 
         }
 
 
+
         function selectAnswer(selectedIndex, correctIndex) {
+
 
             const options = document.querySelectorAll('.option');
 
             const feedback = document.getElementById('feedback');
 
+
             options.forEach(o => o.onclick = null);
+
 
             if (selectedIndex === correctIndex) {
 
+
                 options[selectedIndex].classList.add('correct');
+
 
                 feedback.textContent = 'Parabéns! Resposta correta!';
 
+
                 feedback.className = 'feedback correct';
+
 
                 score += attempts === 0 ? 10 : 5;
 
+
                 document.getElementById('scoreValue').textContent = score;
 
+
                 setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 2000);
+
 
 
             } else {
@@ -800,26 +1066,37 @@
 
                 options[selectedIndex].classList.add('incorrect');
 
+
                 attempts++;
+
 
                 if (attempts >= maxAttempts) {
 
+
                     feedback.textContent = `Incorreta! Resposta: ${options[correctIndex].textContent}`;
+
 
                     feedback.className = 'feedback incorrect';
 
+
+
                     options[correctIndex].classList.add('correct');
 
+
                     setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 3000);
+
 
                 } else {
 
 
                     feedback.textContent = 'Incorreta! Mais uma chance.';
 
+
                     feedback.className = 'feedback incorrect';
 
+
                     setTimeout(() => {
+
 
                         options.forEach((o, i) => {
 
@@ -827,17 +1104,23 @@
                             if (i !== selectedIndex) o.onclick = () => selectAnswer(i, correctIndex);
 
 
+
                         });
 
 
+
                         feedback.textContent = 'Escolha novamente:';
+
 
                         feedback.className = 'feedback';
 
 
                     }, 2000);
 
+
+
                 }
+
 
 
             }
@@ -848,25 +1131,36 @@
 
         function showFinalScreen() {
 
+
             showScreen('finalScreen');
+
 
             document.getElementById('finalScore').textContent = score;
 
+
             let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' : 
+
 
                             score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
 
+
                             score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
+
 
                             score >= 40 ? 'No caminho certo!' : 'Não desista!';
 
+
             document.getElementById('finalMessage').textContent = msg;
+
 
         }
 
 
+
     </script>
 
+
 </body>
+
 
 </html>
