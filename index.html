@@ -5,8 +5,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <br>
-
     <title>Trilha do Curupira</title>
 
     <style>
@@ -81,9 +79,6 @@
         .instructions-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
 
 
-        .quiz-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; padding: 40px; }
-
-
         .quiz-screen { background: linear-gradient(to bottom, #87CEEB, #90EE90); flex-direction: column; padding: 40px 40px 80px; }
 
 
@@ -152,7 +147,7 @@
 
  /*
 
-  * Ajustes para telas menores (celulares).
+  * Ajustes para telas menores (celulares) Responsividade
 
  */
 
@@ -166,6 +161,11 @@
         justify-content: center;
         align-items: flex-start;
 
+    .character svg {
+        width: 100px;
+        height: 100px;
+
+        
     }
 
 
@@ -224,47 +224,59 @@
 
 
           /* TELA DE INSTRUÇÕES */
-
+.instructions-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     max-width:1000px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 40px;
     border-radius: 12px;
     box-sizing: border-box;
     overflow-y: auto;  
-
+    background: linear-gradient(to bottom, #87CEEB, #90EE90);
 
     }
 
 
     .instructions-content {
 
-       display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 10px;
-        width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;   
+    box-sizing: border-box;
 
 
     }
 
 
-
-   .instructions-text,
+/* Texto da tela de instruções */
+   .instructions-text {
+    font-size: 1rem;  
+    margin-bottom: 20px;
+    text-align: center; 
+    line-height: 1.6; /* melhora a leitura */
+    width: 100%;
+    max-width: 650px;   
+    box-sizing: border-box;
+}
+    
+/* Opções do quiz */
+    
     .quiz-option {
-        font-size: 1rem;  
-        padding: 0px;
-        margin-bottom: 20px;
-        border-radius: 100px;
-        text-align: center; 
-        width: 100%;
-        max-width: 650px;   
-        box-sizing: content-box;
+    font-size: 1rem;  
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    text-align: center; 
+    width: 100%;
+    max-width: 650px;   
+    box-sizing: border-box;
 
 
     }
@@ -424,98 +436,37 @@
         </div>
 
 
-        <div class="screen instructions-screen" id="instructionsScreen">
+      <div class="screen instructions-screen" id="instructionsScreen">
+    <div class="instructions-content">
+        <h2 style="margin-bottom: 20px; color: #2d5016; font-size: 22px;">BORA DE TRILHA DO CURUPIRA!</h2>
+        
+        <p>O Curupira, protetor da floresta Amazônica, precisa da sua ajuda para ensinar sobre sustentabilidade e preservação ambiental!</p>
+        
+        <br>
+        
+        <p>Neste quiz você encontrará 10 perguntas sobre a Amazônia, meio ambiente e sustentabilidade. Cada resposta correta vale 10 pontos.</p>
+        
+        <br>
+        
+        <p><strong>Como jogar:</strong></p>
+        <p>• Você tem uma segunda chance se errar a primeira tentativa</p>
+        <p>• Acerte todas as perguntas para conseguir 100 pontos</p>
+        
+        <br>
 
-            <div class="forest-bg"></div>
+        <!-- Personagem centralizado -->
+        <div style="margin: 20px auto;">
+            <svg width="150" height="150" viewBox="0 0 200 280"> ... </svg>
+        </div>
 
-            <div class="instructions-content">
+        <!-- Botões centralizados -->
+        <div class="instructions-buttons">
+            <button class="btn btn-play" onclick="startQuiz()">JOGAR</button>
+            <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
+        </div>
+    </div>
+</div>
 
-                <div class="instructions-text">
-
-
-
-                    <br>
-
-                    <h2 style="margin-bottom: 20px; color: #2d5016;font-size: 18px;">BORA DE TRILHA DO CURUPIRA!</h2>
-
-                    <p>O Curupira, protetor da floresta Amazônica, precisa da sua ajuda para ensinar sobre sustentabilidade e preservação ambiental!</p>
-
-                    <br>
-
-                    <p>Neste quiz você encontrará 10 perguntas sobre a Amazônia, meio ambiente e sustentabilidade. Cada resposta correta vale 10 pontos.</p>
-
-                    <br>
-
-                    <p><strong>Como jogar:</strong></p>
-
-
-                    <p>• Você tem uma segunda chance se errar a primeira tentativa</p>
-
-                    <p>• Acerte todas as perguntas para conseguir 100 pontos</p>
-
-                    <br>
-
-
-                </div>
-
-
-                <div style="display: flex; flex-direction: column; align-items: center;">
-
-                    <div style="width: 150px; height: 150px; margin-bottom: 20px;">
-
-                        <svg width="150" height="150" viewBox="0 0 200 280">
-
-                            <ellipse cx="100" cy="180" rx="40" ry="60" fill="#D2691E"/>
-
-                            <ellipse cx="85" cy="240" rx="12" ry="25" fill="#FF4500"/>
-
-                            <ellipse cx="115" cy="240" rx="12" ry="25" fill="#FF4500"/>
-
-
-                            <path d="M60,200 Q100,190 140,200 Q130,220 120,210 Q110,225 100,215 Q90,225 80,210 Q70,220 60,200" fill="#228B22"/>
-
-                            <circle cx="100" cy="120" r="45" fill="#D2691E"/>
-
-
-                            <path d="M60,90 Q70,50 80,80 Q90,40 100,70 Q110,35 120,75 Q130,45 140,85" fill="#FF4500"/>
-
-                            <circle cx="88" cy="115" r="8" fill="white"/>
-
-                            <circle cx="112" cy="115" r="8" fill="white"/>
-
-                            <circle cx="88" cy="115" r="5" fill="black"/>
-
-                            <circle cx="112" cy="115" r="5" fill="black"/>
-
-                            <path d="M95,135 Q100,138 105,135" stroke="#8B4513" stroke-width="2" fill="none"/>
-
-                            <ellipse cx="75" cy="165" rx="15" ry="25" fill="#D2691E"/>
-
-                            <ellipse cx="125" cy="165" rx="15" ry="25" fill="#D2691E"/>
-
-                            <rect x="70" y="175" width="60" height="40" fill="#8B4513" rx="5"/>
-
-                            <rect x="75" y="180" width="50" height="30" fill="#FFF8DC" rx="2"/>
-
-
-                        </svg>
-
-                    </div>
-
-                    <div class="instructions-buttons">
-
-                        <button class="btn btn-play" onclick="startQuiz()">JOGAR</button>
-
-                        <button class="btn btn-return" onclick="goToMenu()">RETORNAR</button>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
 
 
         </div>
