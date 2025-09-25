@@ -84,7 +84,11 @@
             position: relative;
         }
 
-        .main-menu::before {
+        
+       
+
+           
+            #mainMenu::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -93,6 +97,9 @@
             height: 200px;
             background: #228B22;
             clip-path: ellipse(100% 60% at 50% 100%);
+
+            z-index: 1;
+                
         }
 
         .title {
@@ -287,7 +294,7 @@
 </head>
 <body>
     <div class="game-container">
-        <section id="mainMenu" class="screen main-menu active">
+        <section id="mainMenu" class="screen active">
             <h1 class="title">Trilha do Curupira</h1>
             <p class="subtitle">Um quiz sobre sustentabilidade e a Amazônia</p>
             <div class="menu-buttons">
