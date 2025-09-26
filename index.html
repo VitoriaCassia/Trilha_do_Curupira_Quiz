@@ -500,25 +500,20 @@
             }
         }
 
-                function showFinalScreen() {
-    showScreen('finalScreen');
-    
-    // Apenas manipule o finalScore se ele existir
-    const finalScoreElement = document.getElementById('finalScore');
-    if (finalScoreElement) {
-        finalScoreElement.textContent = score;
-        finalScoreElement.style.textAlign = 'center'; // Se quiser centralizar a pontuação também
-    }
-    
-    let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' :
-        score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
-        score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
-        score >= 40 ? 'No caminho certo!' : 'Não desista!';
+        function showFinalScreen() {
 
-    
-    const finalMessageElement = document.getElementById('finalMessage');
+            showScreen('finalScreen');
 
-    if (finalMessageElement) { 
+            document.getElementById('finalScore').textContent = score;
+
+            let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' :
+
+                score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
+                score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
+                score >= 40 ? 'No caminho certo!' : 'Não desista!';
+
+      const finalMessageElement = document.getElementById('finalMessage');
+
         finalMessageElement.textContent = msg;
         finalMessageElement.style.textAlign = 'center';
 
