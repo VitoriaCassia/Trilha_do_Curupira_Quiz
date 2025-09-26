@@ -84,10 +84,7 @@
             position: relative;
         }
 
-        
-       
-
-           
+                        
             #mainMenu::before {
             content: '';
             position: absolute;
@@ -97,7 +94,6 @@
             height: 200px;
             background: #228B22;
             clip-path: ellipse(100% 60% at 50% 100%);
-
             z-index: 1;
                 
         }
@@ -187,7 +183,7 @@
         }
 
         .question-box h3 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 20px;
             color: #2d5016;
         }
@@ -287,8 +283,6 @@
         }
 
 
-
-
         
     </style>
 </head>
@@ -325,7 +319,7 @@
                 <h3>Desenvolvido por:</h3>
                 <p>Vitória de Cássia - Game Dev e Game Designer<br>Parceria com a Inteligência Artificial</p>
                 <h3>Objetivo:</h3>
-                <p>Educar sobre preservação da Floresta Amazônica</p>
+                <p>Ensinar a respeito da preservação da Floresta Amazônica</p>
                 <button class="btn btn-return" onclick="showScreen('mainMenu')">RETORNAR</button>
             </div>
         </section>
@@ -343,8 +337,8 @@
         </section>
 
         <section id="finalScreen" class="screen final-screen">
-            <h2>Fim do Jogo!</h2>
-            <p>Sua Pontuação Final: <span id="finalScore">0</span></p>
+            <h2>Missão Cumprida!</h2>
+            <p>Total de Acertos: <span id="finalScore">0</span></p>
             <p id="finalMessage"></p>
             <div class="menu-buttons">
                 <button class="btn btn-start" onclick="startQuiz()">Tentar Novamente</button>
@@ -368,7 +362,7 @@
                 correct: 2
             },
             {
-                question: "O que significa 'desmatamento'?",
+                question: "O que significa desmatamento?",
                 options: ["Plantar árvores", "Cortar árvores", "Adubar o solo"],
                 correct: 1
             },
@@ -378,7 +372,7 @@
                 correct: 0
             },
             {
-                question: "O que é 'sustentabilidade'?",
+                question: "O que é sustentabilidade?",
                 options: ["Usar recursos sem se preocupar com o futuro", "Usar recursos de forma a proteger o meio ambiente", "Não usar recursos naturais"],
                 correct: 1
             },
