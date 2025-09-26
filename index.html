@@ -500,20 +500,29 @@
             }
         }
 
-        function showFinalScreen() {
+   
+function showFinalScreen() {
+    
+ 
+    document.getElementById('startScreen').style.display = 'none'; 
+    showScreen('finalScreen'); // Chama sua função para mostrar a tela final
+    
+    
+    document.getElementById('finalScore').textContent = score;
 
-            showScreen('finalScreen');
+    let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' :
+        score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
+        score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
+        score >= 40 ? 'No caminho certo!' : 'Não desista!';
+    
 
-            document.getElementById('finalScore').textContent = score;
-
-            let msg = score === 100 ? 'Perfeito! Verdadeiro protetor!' :
-
-                score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
-                score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
-                score >= 40 ? 'No caminho certo!' : 'Não desista!';
-
-      const finalMessageElement = document.getElementById('finalMessage');
+    const finalMessageElement = document.getElementById('finalMessage');
+    
+    
+    if (finalMessageElement) {
         finalMessageElement.textContent = msg;
+    }
+}
         
 
         }
