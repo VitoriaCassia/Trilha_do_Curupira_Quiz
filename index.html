@@ -500,7 +500,7 @@
             }
         }
 
-        function showFinalScreen() {
+         function showFinalScreen() {
             showScreen('finalScreen');
             document.getElementById('finalScore').textContent = score;
 
@@ -508,11 +508,10 @@
                 score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
                 score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
                 score >= 40 ? 'No caminho certo!' : 'Não desista!';
-      const finalMessageElement = document.getElementById('finalMessage');
-        finalMessageElement.textContent = msg;
-  
 
-            
+            document.getElementById('finalMessage').textContent = msg;
+
+              
         }
 
         }
