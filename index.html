@@ -39,7 +39,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            display: none;
+            display: none; 
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -48,6 +48,7 @@
         }
 
         .screen.active {
+            
             display: flex;
         }
 
@@ -84,8 +85,8 @@
             position: relative;
         }
 
-                        
-            #mainMenu::before {
+        /* ... Seus estilos main-menu::before ... */
+        #mainMenu::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -95,7 +96,6 @@
             background: #228B22;
             clip-path: ellipse(100% 60% at 50% 100%);
             z-index: 1;
-                
         }
 
         .title {
@@ -105,8 +105,6 @@
             margin-bottom: 20px;
             z-index: 10;
             text-align: center; 
-
-            
         }
 
         .subtitle {
@@ -250,7 +248,7 @@
             color: #2d5016;
         }
 
-        /* --- ESTILOS DA TELA FINAL --- */
+        /* --- ESTILOS DA TELA FINAL--- */
         .final-screen h2 {
             font-size: 2.5rem;
             color: #2d5016;
@@ -263,10 +261,17 @@
             margin-bottom: 30px;
             color: #1a3009;
         }
-
-
         
-  /* --- Estilos para telas menores (celulares) --- */
+        
+        #finalScore, 
+        #finalMessage {
+            display: block; 
+            text-align: center;
+            width: 100%;
+        }
+
+
+        /* --- Estilos para telas menores (celulares) --- */
         @media (max-width: 600px) {
             .game-container {
                 width: 95%;
@@ -286,9 +291,6 @@
                 font-size: 1.1rem;
             }
         }
-
-
-        
     </style>
 </head>
 <body>
@@ -356,56 +358,17 @@
     <script>
         const screens = document.querySelectorAll('.screen');
         const questions = [
-            {
-                question: "Qual é a maior floresta tropical do mundo?",
-                options: ["Floresta do Congo", "Floresta Amazônica", "Floresta Negra"],
-                correct: 1
-            },
-            {
-                question: "Qual o nome da lenda indígena que é o protetor da floresta?",
-                options: ["Saci-Pererê", "Cuca", "Curupira"],
-                correct: 2
-            },
-            {
-                question: "O que significa desmatamento?",
-                options: ["Plantar árvores", "Cortar árvores", "Adubar o solo"],
-                correct: 1
-            },
-            {
-                question: "Qual animal é conhecido como o 'Rei da Floresta Amazônica'?",
-                options: ["Onça-pintada", "Capivara", "Macaco-aranha"],
-                correct: 0
-            },
-            {
-                question: "O que é sustentabilidade?",
-                options: ["Usar recursos sem se preocupar com o futuro", "Usar recursos de forma a proteger o meio ambiente", "Não usar recursos naturais"],
-                correct: 1
-            },
-            {
-                question: "Qual o maior rio do mundo em volume de água?",
-                options: ["Rio Nilo", "Rio Amazonas", "Rio Mississippi"],
-                correct: 1
-            },
-            {
-                question: "Qual é o principal bioma da Amazônia?",
-                options: ["Floresta temperada", "Floresta tropical", "Savana"],
-                correct: 1
-            },
-            {
-                question: "O que as queimadas na floresta causam?",
-                options: ["Aumento da vida animal", "Destruição da fauna e flora", "Diminuição do lixo"],
-                correct: 1
-            },
-            {
-                question: "Qual fruta típica da Amazônia é rica em energia?",
-                options: ["Maçã", "Morango", "Açaí"],
-                correct: 2
-            },
-            {
-                question: "Qual atitude ajuda a proteger o meio ambiente?",
-                options: ["Jogar lixo na rua", "Reciclar o lixo", "Desperdiçar água"],
-                correct: 1
-            }
+            // ... (Suas perguntas e lógica inalteradas)
+            { question: "Qual é a maior floresta tropical do mundo?", options: ["Floresta do Congo", "Floresta Amazônica", "Floresta Negra"], correct: 1 },
+            { question: "Qual o nome da lenda indígena que é o protetor da floresta?", options: ["Saci-Pererê", "Cuca", "Curupira"], correct: 2 },
+            { question: "O que significa desmatamento?", options: ["Plantar árvores", "Cortar árvores", "Adubar o solo"], correct: 1 },
+            { question: "Qual animal é conhecido como o 'Rei da Floresta Amazônica'?", options: ["Onça-pintada", "Capivara", "Macaco-aranha"], correct: 0 },
+            { question: "O que é sustentabilidade?", options: ["Usar recursos sem se preocupar com o futuro", "Usar recursos de forma a proteger o meio ambiente", "Não usar recursos naturais"], correct: 1 },
+            { question: "Qual o maior rio do mundo em volume de água?", options: ["Rio Nilo", "Rio Amazonas", "Rio Mississippi"], correct: 1 },
+            { question: "Qual é o principal bioma da Amazônia?", options: ["Floresta temperada", "Floresta tropical", "Savana"], correct: 1 },
+            { question: "O que as queimadas na floresta causam?", options: ["Aumento da vida animal", "Destruição da fauna e flora", "Diminuição do lixo"], correct: 1 },
+            { question: "Qual fruta típica da Amazônia é rica em energia?", options: ["Maçã", "Morango", "Açaí"], correct: 2 },
+            { question: "Qual atitude ajuda a proteger o meio ambiente?", options: ["Jogar lixo na rua", "Reciclar o lixo", "Desperdiçar água"], correct: 1 }
         ];
 
         let score = 0;
@@ -415,6 +378,7 @@
         let questions_shuffled = [];
 
         function showScreen(screenId) {
+          
             screens.forEach(screen => {
                 screen.classList.remove('active');
             });
@@ -501,6 +465,7 @@
         }
 
         function showFinalScreen() {
+          
             showScreen('finalScreen');
             document.getElementById('finalScore').textContent = score;
 
@@ -509,7 +474,10 @@
                 score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
                 score >= 40 ? 'No caminho certo!' : 'Não desista!';
 
-            document.getElementById('finalMessage').textContent = msg;
+            const finalMessageElement = document.getElementById('finalMessage');
+            if (finalMessageElement) {
+                 finalMessageElement.textContent = msg;
+            }
         }
 
         // Inicializa o jogo mostrando o menu principal
