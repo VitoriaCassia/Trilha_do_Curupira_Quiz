@@ -508,8 +508,13 @@
                 score >= 80 ? 'Muito bem! Conhece sustentabilidade!' :
                 score >= 60 ? 'Bom trabalho! Continue aprendendo!' :
                 score >= 40 ? 'No caminho certo!' : 'Não desista!';
+      const finalMessageElement = document.getElementById('finalMessage');
+        finalMessageElement.textContent = msg;
+        finalMessageElement.style.textAlign = 'center';
 
-            document.getElementById('finalMessage').textContent = msg;
+            
+        }
+
         }
 
         // Inicializa o jogo mostrando o menu principal
